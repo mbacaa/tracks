@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
 import './globals.css'
+import { cookies } from 'next/headers'
 
-const inter = Inter({ subsets: ['latin'] })
+import { TRPCReactProvider } from '@/trpc/react'
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -16,7 +17,11 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className={inter.className}>{children}</body>
+			<body className={GeistSans.className}>
+				<TRPCReactProvider cookies={cookies().toString()}>
+					{children}
+				</TRPCReactProvider>
+			</body>
 		</html>
 	)
 }
