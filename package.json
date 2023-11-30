@@ -12,6 +12,7 @@
 		"db:studio": "drizzle-kit studio"
 	},
 	"dependencies": {
+		"@auth/drizzle-adapter": "^0.3.9",
 		"@neondatabase/serverless": "^0.6.0",
 		"@t3-oss/env-nextjs": "^0.7.1",
 		"@tanstack/react-query": "4.32.6",
@@ -22,6 +23,7 @@
 		"drizzle-orm": "^0.29.1",
 		"geist": "^1.2.0",
 		"next": "14.0.3",
+		"next-auth": "^4.24.5",
 		"react": "^18",
 		"react-dom": "^18",
 		"superjson": "^2.2.1",
