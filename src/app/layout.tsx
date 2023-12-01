@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
-import './globals.css'
+import { Toaster } from 'sonner'
 import { cookies } from 'next/headers'
-
+import './globals.css'
+import { cn } from '@/lib/utils'
 import { TRPCReactProvider } from '@/trpc/react'
 
 export const metadata: Metadata = {
@@ -17,9 +18,15 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className={GeistSans.className}>
+			<body
+				className={cn(
+					'min-h-screen bg-background font-sans antialiased',
+					GeistSans.className
+				)}
+			>
 				<TRPCReactProvider cookies={cookies().toString()}>
 					{children}
+					<Toaster closeButton={true} position='top-center' />
 				</TRPCReactProvider>
 			</body>
 		</html>
