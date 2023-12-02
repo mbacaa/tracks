@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { getUser } from '@/server/auth'
 
@@ -12,6 +13,7 @@ export default async function LandingLayout({ children }: LandingLayoutProps) {
 		<div className='min-h-screen flex flex-col'>
 			<Header user={user} />
 			<main className='flex-1'>{children}</main>
+			<Footer />
 		</div>
 	)
 }

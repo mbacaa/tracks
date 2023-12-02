@@ -15,7 +15,7 @@ export default async function Home() {
 					variant='secondary'
 				>
 					<Icons.github className='inline-block mr-2 h-3.5 w-3.5' />
-					Follow along on GitHub
+					Explore the code on GitHub
 				</Badge>
 			</Link>
 

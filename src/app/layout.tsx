@@ -5,6 +5,7 @@ import { cookies } from 'next/headers'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import { TRPCReactProvider } from '@/trpc/react'
+import { ThemeProvider } from '@/components/ThemeProvider'
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -25,8 +26,15 @@ export default function RootLayout({
 				)}
 			>
 				<TRPCReactProvider cookies={cookies().toString()}>
-					{children}
-					<Toaster closeButton={true} position='top-center' />
+					<ThemeProvider
+						attribute='class'
+						defaultTheme='system'
+						enableSystem
+						disableTransitionOnChange
+					>
+						{children}
+						<Toaster closeButton={true} position='top-center' />
+					</ThemeProvider>
 				</TRPCReactProvider>
 			</body>
 		</html>

@@ -7,6 +7,9 @@ import {
 	Menu,
 	ChevronLeft,
 	LogOut,
+	Moon,
+	Sun,
+	Laptop,
 } from 'lucide-react'
 
 export const Icons = {
@@ -38,4 +41,7 @@ export const Icons = {
 	loader: Loader2,
 	back: ChevronLeft,
 	logout: LogOut,
+	moon: Moon,
+	sun: Sun,
+	system: Laptop,
 }
