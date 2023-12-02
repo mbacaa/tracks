@@ -6,6 +6,7 @@ import {
 	Loader2,
 	Menu,
 	ChevronLeft,
+	LogOut,
 } from 'lucide-react'
 
 export const Icons = {
@@ -36,4 +37,5 @@ export const Icons = {
 	github: Github,
 	loader: Loader2,
 	back: ChevronLeft,
+	logout: LogOut,
 }

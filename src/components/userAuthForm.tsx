@@ -1,6 +1,6 @@
 'use client'
 
-import * as React from 'react'
+import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
@@ -32,9 +32,9 @@ export function UserAuthForm({
 	} = useForm<FormData>({
 		resolver: zodResolver(userAuthSchema),
 	})
-	const [isLoading, setIsLoading] = React.useState<boolean>(false)
-	const [isGoogleLoading, setIsGoogleLoading] = React.useState<boolean>(false)
-	const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+	const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false)
+	const [isGitHubLoading, setIsGitHubLoading] = useState<boolean>(false)
 
 	async function onSubmit(data: FormData) {
 		return toast('This feature is not implemented yet..')
@@ -48,7 +48,7 @@ export function UserAuthForm({
 					className={cn(buttonVariants({ variant: 'outline' }))}
 					onClick={() => {
 						setIsGoogleLoading(true)
-						signIn('google')
+						signIn('google', { callbackUrl: '/dashboard' })
 					}}
 					disabled={isLoading || isGitHubLoading || isGoogleLoading}
 				>
@@ -64,7 +64,7 @@ export function UserAuthForm({
 					className={cn(buttonVariants({ variant: 'outline' }))}
 					onClick={() => {
 						setIsGitHubLoading(true)
-						signIn('github')
+						signIn('github', { callbackUrl: '/dashboard' })
 					}}
 					disabled={isLoading || isGitHubLoading || isGoogleLoading}
 				>

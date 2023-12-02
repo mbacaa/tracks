@@ -1,6 +1,7 @@
 import { DrizzleAdapter } from '@auth/drizzle-adapter'
 import {
 	getServerSession,
+	DefaultUser,
 	type DefaultSession,
 	type NextAuthOptions,
 } from 'next-auth'
@@ -15,6 +16,9 @@ declare module 'next-auth' {
 	interface Session extends DefaultSession {
 		user: {
 			id: string
+			email?: string
+			name?: string
+			image?: string
 		} & DefaultSession['user']
 	}
 }
@@ -26,6 +30,9 @@ export const authOptions: NextAuthOptions = {
 			user: {
 				...session.user,
 				id: user.id,
+				email: user.email,
+				name: user.name,
+				image: user.image,
 			},
 		}),
 	},
@@ -43,3 +50,15 @@ export const authOptions: NextAuthOptions = {
 }
 
 export const getServerAuthSession = () => getServerSession(authOptions)
+
+export interface User extends DefaultUser {
+	id: string
+	email?: string
+	name?: string
+	image?: string
+}
+
+export const getUser = async (): Promise<User | null> => {
+	const session = await getServerAuthSession()
+	return session ? session.user : null
+}

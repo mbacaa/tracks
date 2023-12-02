@@ -54,15 +54,16 @@ export default function MobileNav({ name, items }: MainNavProps) {
 							>
 								{items?.map((item, key) =>
 									item.items ? (
-										<AccordionItem value={`item-${key}`}>
+										<AccordionItem key={key} value={`item-${key}`}>
 											<AccordionTrigger className='text-foreground'>
 												{item.title}
 											</AccordionTrigger>
 											<AccordionContent className='flex flex-col gap-2 justify-start'>
 												<div className='flex flex-col space-y-2'>
-													{item.items?.map((subItem) =>
+													{item.items?.map((subItem, key) =>
 														subItem.href ? (
 															<MobileLink
+																key={key}
 																href={String(subItem.href)}
 																setIsOpen={setIsOpen}
 																disabled={subItem.disabled}
@@ -70,7 +71,10 @@ export default function MobileNav({ name, items }: MainNavProps) {
 																{subItem.title}
 															</MobileLink>
 														) : (
-															<div className='text-foreground/70 transition-colors'>
+															<div
+																key={key}
+																className='text-foreground/70 transition-colors'
+															>
 																{item.title}
 															</div>
 														)
@@ -80,10 +84,12 @@ export default function MobileNav({ name, items }: MainNavProps) {
 										</AccordionItem>
 									) : (
 										<AccordionItem
+											key={key}
 											value={`item-${key}`}
 											className='flex justify-start'
 										>
 											<MobileLink
+												key={key}
 												href={String(item.href)}
 												setIsOpen={setIsOpen}
 												disabled={item.disabled}
