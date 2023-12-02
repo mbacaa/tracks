@@ -6,13 +6,13 @@ import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { toast } from 'sonner'
-import { Chrome, Github, Loader2 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { userAuthSchema } from '@/lib/validations/auth'
 import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Icons } from './Icons'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
 	isLogin?: boolean
@@ -53,9 +53,9 @@ export function UserAuthForm({
 					disabled={isLoading || isGitHubLoading || isGoogleLoading}
 				>
 					{isGoogleLoading ? (
-						<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+						<Icons.loader className='mr-2 h-4 w-4 animate-spin' />
 					) : (
-						<Chrome className='mr-2 h-4 w-4' />
+						<Icons.google className='mr-2 h-4 w-4' />
 					)}{' '}
 					Google
 				</button>
@@ -69,9 +69,9 @@ export function UserAuthForm({
 					disabled={isLoading || isGitHubLoading || isGoogleLoading}
 				>
 					{isGitHubLoading ? (
-						<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+						<Icons.loader className='mr-2 h-4 w-4 animate-spin' />
 					) : (
-						<Github className='mr-2 h-4 w-4' />
+						<Icons.github className='mr-2 h-4 w-4' />
 					)}{' '}
 					Github
 				</button>
@@ -109,7 +109,9 @@ export function UserAuthForm({
 						)}
 					</div>
 					<button className={cn(buttonVariants())} disabled={isLoading}>
-						{isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+						{isLoading && (
+							<Icons.loader className='mr-2 h-4 w-4 animate-spin' />
+						)}
 						{isLogin ? 'Sign In' : 'Sign Up'}
 					</button>
 				</div>
