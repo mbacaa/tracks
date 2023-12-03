@@ -1,11 +1,9 @@
 import {
-	index,
 	integer,
 	pgTableCreator,
 	primaryKey,
 	text,
 	timestamp,
-	varchar,
 } from 'drizzle-orm/pg-core'
 import { type AdapterAccount } from 'next-auth/adapters'
 

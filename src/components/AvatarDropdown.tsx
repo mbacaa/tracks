@@ -22,6 +22,7 @@ import {
 	AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { useState } from 'react'
+import Link from 'next/link'
 
 interface AvatarDropdownProps {
 	user: User
@@ -49,6 +50,31 @@ export default function AvatarDropdown({ user }: AvatarDropdownProps) {
 					</div>
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
+
+				<DropdownMenuLabel className='flex w-full h-full p-2 items-center transition-all hover:bg-muted rounded-md text-sm font-normal'>
+					<Link href='/account' className='flex items-center w-full'>
+						<Icons.account className='w-4 h-4 mr-2' />
+						Account
+					</Link>
+				</DropdownMenuLabel>
+				<DropdownMenuSeparator />
+
+				<DropdownMenuLabel className='flex w-full h-full p-2 items-center transition-all hover:bg-muted rounded-md text-sm font-normal'>
+					<Link href='/dashboard' className='flex items-center w-full'>
+						<Icons.dashboard className='w-4 h-4 mr-2' />
+						Dashboard
+					</Link>
+				</DropdownMenuLabel>
+				<DropdownMenuSeparator />
+
+				<DropdownMenuLabel className='flex w-full h-full p-2 items-center transition-all hover:bg-muted rounded-md text-sm font-normal'>
+					<Link href='/billing' className='flex items-center w-full'>
+						<Icons.billing className='w-4 h-4 mr-2' />
+						Billing
+					</Link>
+				</DropdownMenuLabel>
+				<DropdownMenuSeparator />
+
 				<DropdownMenuLabel>
 					<AlertDialog>
 						<AlertDialogTrigger className='flex w-full h-full p-2 items-center transition-all hover:bg-muted rounded-md'>

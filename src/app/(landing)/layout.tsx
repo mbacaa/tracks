@@ -12,7 +12,7 @@ export default async function LandingLayout({ children }: LandingLayoutProps) {
 	return (
 		<div className='min-h-screen flex flex-col'>
 			<Header user={user} />
-			<main className='flex-1'>{children}</main>
+			<main className='flex-1 min-h-screen'>{children}</main>
 			<Footer />
 		</div>
 	)

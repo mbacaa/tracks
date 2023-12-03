@@ -20,18 +20,18 @@ export default async function Home() {
 			</Link>
 
 			<h1 className='font-bold tracking-tighter text-3xl sm:text-5xl md:text-6xl lg:text-7xl'>
-				NextBeats: Showcasing the Power of Next.js 14 in e-commerce.
+				Showcasing the Power of Next.js 14 in e-commerce.
 			</h1>
 			<h2 className='max-w-[40rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8'>
 				Explore a playground of beats and witness the seamless magic of Next.js
 				14 in crafting this unique e-commerce experience.
 			</h2>
 			<div className='flex flex-wrap items-center justify-center gap-4'>
-				<Link href='/' className={buttonVariants()}>
+				<Link href='/beats' className={buttonVariants()}>
 					Start shopping
 				</Link>
 				<Link
-					href='/'
+					href='/dashboard'
 					className={cn(
 						buttonVariants({
 							variant: 'outline',
