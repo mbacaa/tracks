@@ -4,8 +4,31 @@ import {
 	primaryKey,
 	text,
 	timestamp,
+	pgEnum,
+	doublePrecision,
+	serial,
+	varchar,
 } from 'drizzle-orm/pg-core'
 import { type AdapterAccount } from 'next-auth/adapters'
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
+import { trackMetadataArrays } from '@/config/tracks'
+
+export const typeEnum = pgEnum('type', [...trackMetadataArrays.trackTypes] as [
+	string,
+	...string[]
+])
+export const genreEnum = pgEnum('genre', [...trackMetadataArrays.genres] as [
+	string,
+	...string[]
+])
+export const moodEnum = pgEnum('mood', [...trackMetadataArrays.moods] as [
+	string,
+	...string[]
+])
+export const keyEnum = pgEnum('key', [...trackMetadataArrays.keys] as [
+	string,
+	...string[]
+])
 
 export const pgTable = pgTableCreator((name) => `beats_${name}`)
 
@@ -29,7 +52,6 @@ export const accounts = pgTable(
 		refresh_token: text('refresh_token'),
 		access_token: text('access_token'),
 		expires_at: integer('expires_at'),
-		refresh_token_expires_in: integer('refresh_token_expires_in'),
 		token_type: text('token_type'),
 		scope: text('scope'),
 		id_token: text('id_token'),
@@ -59,3 +81,24 @@ export const verificationTokens = pgTable(
 		compoundKey: primaryKey(vt.identifier, vt.token),
 	})
 )
+
+export const tracks = pgTable('tracks', {
+	id: serial('id').primaryKey(),
+	title: varchar('title', { length: 255 }).notNull(),
+	description: varchar('description', { length: 500 }),
+	type: typeEnum('type').notNull().default('Beat'),
+	genre: genreEnum('genre').notNull().default('Pop'),
+	mood: moodEnum('mood').notNull().default('Happy'),
+	key: keyEnum('key').notNull().default('C'),
+	bpm: integer('bpm').notNull().notNull().default(120),
+	userId: text('userId')
+		.notNull()
+		.references(() => users.id, { onDelete: 'cascade' }),
+	imageUrl: text('imageUrl').notNull().default(''),
+	audioUrl: text('audioUrl').notNull().default(''),
+	price: doublePrecision('price').default(0.0),
+	releaseDate: timestamp('releaseDate').defaultNow(),
+})
+
+export const selectTrackSchema = createSelectSchema(tracks)
+export const insertTrackSchema = createInsertSchema(tracks)

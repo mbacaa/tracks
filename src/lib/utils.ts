@@ -10,3 +10,7 @@ export function getBaseUrl() {
 	if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
 	return `http://localhost:${process.env.PORT ?? 3000}`
 }
+
+export function getValues<T extends Record<string, any>>(obj: T) {
+	return Object.values(obj) as [(typeof obj)[keyof T]]
+}

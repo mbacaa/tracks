@@ -1,4 +1,4 @@
-import { FooterItem, MainNavItem } from '@/types'
+import { FooterItem, MainNavItem } from '@/types/nav'
 
 const links = {
 	github: 'https://github.com/mbacaa/beats',
@@ -6,7 +6,7 @@ const links = {
 }
 
 export const siteConfig = {
-	name: 'NextBeats',
+	name: 'Tracks',
 	description: 'Your go-to marketplace for beats.',
 	links,
 	mainNav: [

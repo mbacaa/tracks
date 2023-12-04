@@ -1,5 +1,4 @@
-import { redirect } from 'next/navigation'
-import { authOptions, getUser } from '@/server/auth'
+import { checkAuth } from '@/server/auth'
 import DashboardNav from '@/components/DashboardNav'
 
 interface DashboardLayoutProps {
@@ -9,11 +8,7 @@ interface DashboardLayoutProps {
 export default async function DashboardLayout({
 	children,
 }: DashboardLayoutProps) {
-	const user = await getUser()
-
-	if (!user) {
-		redirect(authOptions?.pages?.signIn || '/login')
-	}
+	await checkAuth()
 
 	return (
 		<div className='min-h-screen flex flex-col'>

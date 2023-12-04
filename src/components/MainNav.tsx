@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { Icons } from '@/components/Icons'
-import { MainNavItem } from '@/types'
+import { MainNavItem } from '@/types/nav'
 import {
 	NavigationMenu,
 	NavigationMenuContent,

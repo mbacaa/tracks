@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import { MainNavItem } from '@/types'
+import { MainNavItem } from '@/types/nav'
 import { Icons } from '@/components/Icons'
 import {
 	Sheet,

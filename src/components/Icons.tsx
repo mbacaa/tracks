@@ -14,6 +14,9 @@ import {
 	UploadCloud,
 	Plus,
 	Grid2x2,
+	ChevronsUpDown,
+	Check,
+	ChevronRight,
 } from 'lucide-react'
 
 export const Icons = {
@@ -60,6 +63,7 @@ export const Icons = {
 	),
 	loader: Loader2,
 	back: ChevronLeft,
+	next: ChevronRight,
 	logout: LogOut,
 	moon: Moon,
 	sun: Sun,
@@ -69,4 +73,6 @@ export const Icons = {
 	account: CircleUser,
 	upload: UploadCloud,
 	plus: Plus,
+	chevronUpDown: ChevronsUpDown,
+	check: Check,
 }

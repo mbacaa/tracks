@@ -1,8 +1,8 @@
-import { testRouter } from '@/server/api/routers/test'
 import { createTRPCRouter } from '@/server/api/trpc'
+import { tracksRouter } from './routers/tracks'
 
 export const appRouter = createTRPCRouter({
-	test: testRouter,
+	tracks: tracksRouter,
 })
 
 export type AppRouter = typeof appRouter

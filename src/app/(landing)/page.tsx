@@ -23,11 +23,11 @@ export default async function Home() {
 				Showcasing the Power of Next.js 14 in e-commerce.
 			</h1>
 			<h2 className='max-w-[40rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8'>
-				Explore a playground of beats and witness the seamless magic of Next.js
+				Explore a playground of tracks and witness the seamless magic of Next.js
 				14 in crafting this unique e-commerce experience.
 			</h2>
 			<div className='flex flex-wrap items-center justify-center gap-4'>
-				<Link href='/beats' className={buttonVariants()}>
+				<Link href='/tracks' className={buttonVariants()}>
 					Start shopping
 				</Link>
 				<Link

@@ -7,6 +7,7 @@ import {
 } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
+import { redirect } from 'next/navigation'
 
 import { env } from '@/env'
 import { db } from '@/server/db'
@@ -58,7 +59,12 @@ export interface User extends DefaultUser {
 	image?: string
 }
 
-export const getUser = async (): Promise<User | null> => {
+export const getUserAuth = async (): Promise<User | null> => {
 	const session = await getServerAuthSession()
 	return session ? session.user : null
+}
+
+export const checkAuth = async () => {
+	const session = await getUserAuth()
+	if (!session) redirect('/login')
 }
