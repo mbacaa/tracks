@@ -22,6 +22,7 @@ import {
 	Clock,
 	Heart,
 	DollarSign,
+	Ghost,
 } from 'lucide-react'
 
 export const Icons = {
@@ -83,4 +84,5 @@ export const Icons = {
 	bpm: Activity,
 	key: Music2,
 	date: Clock,
+	ghost: Ghost,
 }

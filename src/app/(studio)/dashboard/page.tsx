@@ -1,9 +1,11 @@
+import { Icons } from '@/components/Icons'
 import TrackArtwork from '@/components/TrackArtwork'
 import UploadTrackForm from '@/components/UploadTrackForm/UploadTrackForm'
 import { api } from '@/trpc/server'
 
 export default async function Dashboard() {
 	const myTracks = await api.tracks.getUsersTracks.query()
+	await new Promise((resolve) => setTimeout(resolve, 1000))
 
 	return (
 		<main className='h-full flex flex-col'>
@@ -26,8 +28,9 @@ export default async function Dashboard() {
 						/>
 					))
 				) : (
-					<h3 className='mt-24 col-span-full font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl text-center text-muted'>
-						You haven&apos;t uploaded any tracks yet.
+					<h3 className='mt-24 w-full h-full flex flex-col justify-center items-center font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl text-center text-muted-foreground/20'>
+						<Icons.ghost className='w-12 h-12 mb-4' />
+						<p>You haven&apos;t uploaded any tracks yet.</p>
 					</h3>
 				)}
 			</section>

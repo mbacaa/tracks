@@ -16,10 +16,10 @@ export default async function Dashboard() {
 					Upload new beat
 				</Button>
 			</section>
-			<section className='mt-16 flex flex-wrap gap-12'>
+			<section className='mt-8 flex flex-wrap gap-8'>
 				{array.map((_, index) => (
 					<div key={index} className='flex flex-col gap-2'>
-						<Skeleton className='w-[200px] h-[200px] rounded-md' />
+						<Skeleton className='w-[220px] h-[220px] rounded-md' />
 						<Skeleton className='w-[100px] h-[14px] rounded-lg' />
 						<Skeleton className='w-[150px] h-[10px] rounded-lg' />
 					</div>
