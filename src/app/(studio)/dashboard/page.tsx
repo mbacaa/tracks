@@ -5,7 +5,6 @@ import { api } from '@/trpc/server'
 
 export default async function Dashboard() {
 	const myTracks = await api.tracks.getUsersTracks.query()
-	await new Promise((resolve) => setTimeout(resolve, 1000))
 
 	return (
 		<main className='h-full flex flex-col'>
