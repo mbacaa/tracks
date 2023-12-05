@@ -101,4 +101,6 @@ export const tracks = pgTable('tracks', {
 })
 
 export const selectTrackSchema = createSelectSchema(tracks)
-export const insertTrackSchema = createInsertSchema(tracks)
+export const insertTrackSchema = createInsertSchema(tracks).omit({
+	userId: true,
+})

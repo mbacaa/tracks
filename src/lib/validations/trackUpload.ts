@@ -1,12 +1,12 @@
+import { genres, keys, moods, trackTypes } from '@/config/tracks'
 import * as z from 'zod'
 import { getValues } from '../utils'
-import { trackTypes, genres, moods, keys } from '@/config/tracks'
 
 export const trackUploadSchema = z.object({
 	imageUrl: z.string().url(),
 	audioUrl: z.string().url(),
 	title: z.string().min(4).max(255),
-	description: z.string().max(255).optional(),
+	description: z.string().max(500).optional(),
 	type: z.enum(getValues(trackTypes), {
 		required_error: 'Must be a valid track type',
 	}),
@@ -20,5 +20,5 @@ export const trackUploadSchema = z.object({
 		required_error: 'Must be a valid key',
 	}),
 	bpm: z.number().int().min(1).max(300),
-	price: z.number().multipleOf(0.01),
+	price: z.number().min(0.01).max(100000),
 })

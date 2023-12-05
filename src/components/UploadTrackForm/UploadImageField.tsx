@@ -20,11 +20,19 @@ export default function UploadImageField({
 	return (
 		<>
 			<FormField
-				control={form.control}
 				name={'imageUrl' as const}
 				render={({ field }) => (
 					<FormItem>
 						<UploadDropzone
+							content={{
+								label({ ready }) {
+									if (ready && form.getValues().imageUrl != '') {
+										return `Change Image File`
+									} else {
+										return 'Choose Image or Drag and Drop'
+									}
+								},
+							}}
 							className={className}
 							endpoint='imageUploader'
 							onClientUploadComplete={(res) => {

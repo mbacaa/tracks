@@ -20,11 +20,19 @@ export default function UploadAudioField({
 	return (
 		<>
 			<FormField
-				control={form.control}
 				name={'imageUrl' as const}
 				render={({ field }) => (
 					<FormItem>
 						<UploadDropzone
+							content={{
+								label({ ready }) {
+									if (ready && form.getValues().audioUrl != '') {
+										return `Change Audio File`
+									} else {
+										return 'Choose Audio or Drag and Drop'
+									}
+								},
+							}}
 							className={className}
 							endpoint='audioUploader'
 							onClientUploadComplete={(res) => {
@@ -35,7 +43,6 @@ export default function UploadAudioField({
 							onUploadError={(error: Error) => {
 								toast.warning(`ERROR! ${error.message}`)
 							}}
-							{...field}
 						/>
 						<FormMessage />
 					</FormItem>

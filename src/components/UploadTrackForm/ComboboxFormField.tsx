@@ -1,8 +1,10 @@
+'use client'
+
+import { cn } from '@/lib/utils'
+import { trackUploadSchema } from '@/lib/validations/trackUpload'
 import { UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 import { Icons } from '../Icons'
-import { cn } from '@/lib/utils'
-import { trackUploadSchema } from '@/lib/validations/trackUpload'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -16,8 +18,7 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
-	FormLabel,
-	FormMessage,
+	FormMessage
 } from '@/components/ui/form'
 import {
 	Popover,
@@ -44,7 +45,7 @@ export default function ComboboxFormField({
 				name={fieldName}
 				render={({ field }) => (
 					<FormItem>
-						<Popover>
+						<Popover modal={true}>
 							<PopoverTrigger asChild>
 								<FormControl>
 									<Button

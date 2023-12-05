@@ -1,3 +1,5 @@
+'use client'
+
 import { Textarea } from '@/components/ui/textarea'
 import { trackUploadSchema } from '@/lib/validations/trackUpload'
 import { UseFormReturn } from 'react-hook-form'
@@ -18,12 +20,21 @@ import {
 	FormMessage,
 } from '../ui/form'
 import { Input } from '../ui/input'
+import { Icons } from '../Icons'
+import { cn } from '@/lib/utils'
+import TrackArtwork from '../TrackArtwork'
 
 interface ReviewCardProps {
 	form: UseFormReturn<z.infer<typeof trackUploadSchema>>
+	onSubmit: (data: z.infer<typeof trackUploadSchema>) => void
+	isLoading?: boolean
 }
 
-export default function ReviewCard({ form }: ReviewCardProps) {
+export default function ReviewCard({
+	form,
+	onSubmit,
+	isLoading,
+}: ReviewCardProps) {
 	return (
 		<>
 			<Card className='h-full'>
@@ -34,8 +45,8 @@ export default function ReviewCard({ form }: ReviewCardProps) {
 						before publishing.
 					</CardDescription>
 				</CardHeader>
-				<CardContent>
-					<div className='flex flex-col gap-4'>
+				<CardContent className='flex flex-col sm:flex-row gap-6'>
+					<div className='flex flex-1 flex-col gap-4'>
 						{/* Title */}
 						<div className='flex flex-col gap-2 w-full'>
 							<FormLabel>Title</FormLabel>
@@ -73,10 +84,39 @@ export default function ReviewCard({ form }: ReviewCardProps) {
 								)}
 							/>
 						</div>
+					</div>
+					<div className='flex flex-col gap-4 md:ml-12 items-center sm:items-end'>
+						{/*Preview Artwork*/}
+						<TrackArtwork
+							track={{
+								title: form.getValues().title,
+								imageUrl: form.getValues().imageUrl,
+								bpm: form.getValues().bpm,
+								key: form.getValues().key,
+								price: form.getValues().price,
+								releaseDate: new Date(),
+							}}
+							width={200}
+							height={200}
+							aspectRatio='square'
+						/>
 
 						{/* Submit */}
 						<div className='flex justify-end'>
-							<Button type='submit' className={buttonVariants({ size: 'sm' })}>
+							<Button
+								type='submit'
+								onClick={() => onSubmit(form.getValues())}
+								className={cn(
+									buttonVariants({ size: 'sm' }),
+									'flex items-center w-full'
+								)}
+								disabled={isLoading}
+							>
+								{isLoading ? (
+									<Icons.loader className='w-4 h-4 mr-2 animate-spin' />
+								) : (
+									<Icons.check className='w-4 h-4 mr-2' />
+								)}
 								Submit
 							</Button>
 						</div>

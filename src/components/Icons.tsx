@@ -17,6 +17,11 @@ import {
 	ChevronsUpDown,
 	Check,
 	ChevronRight,
+	Activity,
+	Music2,
+	Clock,
+	Heart,
+	DollarSign,
 } from 'lucide-react'
 
 export const Icons = {
@@ -75,4 +80,7 @@ export const Icons = {
 	plus: Plus,
 	chevronUpDown: ChevronsUpDown,
 	check: Check,
+	bpm: Activity,
+	key: Music2,
+	date: Clock,
 }
