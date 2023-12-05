@@ -50,7 +50,7 @@ export default function TrackArtwork({
 								)}
 							/>
 						)}
-						<div className='absolute flex-col justify-end items-end gap-1 opacity-0 p-2 top-0 z-10 text-xs font-medium text-muted-foreground transition-opacity duration-50 ease-in-out group-hover:opacity-100 flex w-full h-full bg-black/60 group-hover:backdrop-blur-[3px]'>
+						<div className='absolute flex-col justify-end items-end gap-1 opacity-0 p-2 top-0 z-10 text-xs font-medium text-muted-background transition-opacity duration-50 ease-in-out group-hover:opacity-100 flex w-full h-full bg-background/50 group-hover:backdrop-blur-[3px]'>
 							<p className='text-lg font-bold mb-auto'>{track.price} $</p>
 							<p className='flex items-center'>
 								{track.bpm}
