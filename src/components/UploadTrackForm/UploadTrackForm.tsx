@@ -50,6 +50,7 @@ export default function UploadTrackForm() {
 			onSuccess: () => {
 				router.refresh()
 				toast.success('Track uploaded successfully!')
+				form.reset()
 			},
 			onError: (err) => {
 				toast.error(err.message)
