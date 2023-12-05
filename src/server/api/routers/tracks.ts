@@ -6,7 +6,7 @@ import {
 import { db } from '@/server/db'
 import { tracks, users } from '@/server/db/schema'
 import { z } from 'zod'
-import { eq } from 'drizzle-orm'
+import { desc, eq } from 'drizzle-orm'
 import { insertTrackSchema } from '@/server/db/schema'
 
 export const tracksRouter = createTRPCRouter({
@@ -18,6 +18,7 @@ export const tracksRouter = createTRPCRouter({
 			.select()
 			.from(tracks)
 			.where(eq(tracks.userId, ctx.session.user.id))
+			.orderBy(desc(tracks.releaseDate))
 	}),
 
 	createTrack: protectedProcedure
@@ -25,12 +26,9 @@ export const tracksRouter = createTRPCRouter({
 		.mutation(async ({ ctx, input }) => {
 			const userId = ctx.session.user.id
 
-			return await db
-				.insert(tracks)
-				.values({
-					...input,
-					userId,
-				})
-				.returning()
+			return await db.insert(tracks).values({
+				...input,
+				userId,
+			})
 		}),
 })
