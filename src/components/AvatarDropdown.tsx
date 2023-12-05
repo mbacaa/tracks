@@ -52,7 +52,7 @@ export default function AvatarDropdown({ user }: AvatarDropdownProps) {
 				<DropdownMenuSeparator />
 
 				<DropdownMenuLabel className='flex w-full h-full p-2 items-center transition-all hover:bg-muted rounded-md text-sm font-normal'>
-					<Link href='/account' className='flex items-center w-full'>
+					<Link href='/dashboard/account' className='flex items-center w-full'>
 						<Icons.account className='w-4 h-4 mr-2' />
 						Account
 					</Link>
@@ -68,7 +68,7 @@ export default function AvatarDropdown({ user }: AvatarDropdownProps) {
 				<DropdownMenuSeparator />
 
 				<DropdownMenuLabel className='flex w-full h-full p-2 items-center transition-all hover:bg-muted rounded-md text-sm font-normal'>
-					<Link href='/billing' className='flex items-center w-full'>
+					<Link href='/dashboard/billing' className='flex items-center w-full'>
 						<Icons.billing className='w-4 h-4 mr-2' />
 						Billing
 					</Link>
