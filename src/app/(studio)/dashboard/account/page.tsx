@@ -4,7 +4,6 @@ import { redirect } from 'next/navigation'
 
 export default async function Account() {
 	const user = await getUserAuth()
-	await new Promise((resolve) => setTimeout(resolve, 1000))
 
 	if (!user) {
 		redirect('/login')

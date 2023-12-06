@@ -82,7 +82,7 @@ export default function UserAccountForm({ user }: UserAccountFormProps) {
 									<FormControl>
 										<Input
 											id='name'
-											className='w-[400px]'
+											className='w-full md:w-3/4 lg:w-1/2'
 											{...form.register('name')}
 										/>
 									</FormControl>
