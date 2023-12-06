@@ -14,7 +14,7 @@ export default async function Dashboard() {
 				</h2>
 				<UploadTrackForm />
 			</section>
-			<section className='mt-8 flex flex-wrap gap-8'>
+			<section className='mt-8 flex flex-wrap gap-8 justify-center md:justify-start'>
 				{myTracks && myTracks.length > 0 ? (
 					myTracks.map((track, index) => (
 						<TrackArtwork

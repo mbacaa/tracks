@@ -16,7 +16,7 @@ export default async function Dashboard() {
 					Upload new beat
 				</Button>
 			</section>
-			<section className='mt-8 flex flex-wrap gap-8'>
+			<section className='mt-8 flex flex-wrap gap-8 justify-center md:justify-start'>
 				{array.map((_, index) => (
 					<div key={index} className='flex flex-col gap-2'>
 						<Skeleton className='w-[220px] h-[220px] rounded-md' />

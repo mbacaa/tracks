@@ -13,7 +13,6 @@ import {
 import { FormLabel } from '../ui/form'
 import UploadAudioField from './UploadAudioField'
 import UploadImageField from './UploadImageField'
-import { ScrollArea } from '../ui/scroll-area'
 
 interface FilesCardProps {
 	form: UseFormReturn<z.infer<typeof trackUploadSchema>>
@@ -26,7 +25,7 @@ export default function FilesCard({ form }: FilesCardProps) {
 	return (
 		<>
 			<Card className='flex flex-col h-full'>
-				<ScrollArea className='overflow-hidden'>
+				
 					<CardHeader>
 						<CardTitle>Files</CardTitle>
 						<CardDescription>
@@ -51,7 +50,7 @@ export default function FilesCard({ form }: FilesCardProps) {
 							/>
 						</div>
 					</CardContent>
-				</ScrollArea>
+		
 			</Card>
 		</>
 	)

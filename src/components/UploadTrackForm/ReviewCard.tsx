@@ -108,16 +108,15 @@ export default function ReviewCard({
 								onClick={() => onSubmit(form.getValues())}
 								className={cn(
 									buttonVariants({ size: 'sm' }),
-									'flex items-center w-full'
+									'flex items-center w-20'
 								)}
 								disabled={isLoading}
 							>
 								{isLoading ? (
 									<Icons.loader className='w-4 h-4 mr-2 animate-spin' />
 								) : (
-									<Icons.check className='w-4 h-4 mr-2' />
+									<span>Submit</span>
 								)}
-								Submit
 							</Button>
 						</div>
 					</div>

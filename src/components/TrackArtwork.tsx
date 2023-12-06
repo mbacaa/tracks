@@ -34,7 +34,7 @@ export default function TrackArtwork({
 			<ContextMenu>
 				<ContextMenuTrigger>
 					<div className='group relative overflow-hidden rounded-md'>
-						{track.imageUrl ? (
+						{track.imageUrl && track.imageUrl !== '' ? (
 							<Image
 								src={track.imageUrl}
 								alt={'Track Artwork Preview'}
@@ -47,10 +47,13 @@ export default function TrackArtwork({
 							/>
 						) : (
 							<div
-								className={cn(
-									`h-[${height}px] w-[${width}px]`,
+								style={{
+									height: `${height}px`,
+									width: `${width}px`,
+								}}
+								className={
 									'transition-all duration-200 ease-in-out transform group-hover:scale-105 border'
-								)}
+								}
 							/>
 						)}
 						<div className='absolute flex-col justify-end items-end gap-1 opacity-0 p-2 top-0 z-10 text-xs font-medium text-muted-background transition-opacity duration-50 ease-in-out group-hover:opacity-100 flex w-full h-full bg-background/50 group-hover:backdrop-blur-[3px]'>

@@ -22,6 +22,7 @@ import FilesCard from './FilesCard'
 import MetadataCard from './MetadataCard'
 import ReviewCard from './ReviewCard'
 import { useRouter } from 'next/navigation'
+import { ScrollArea } from '@radix-ui/react-scroll-area'
 
 export default function UploadTrackForm() {
 	const router = useRouter()
@@ -79,7 +80,7 @@ export default function UploadTrackForm() {
 					</DialogTrigger>
 
 					<DialogContent
-						className='max-w-4xl h-5/6 flex flex-col justify-between'
+						className='h-screen max-w-4xl md:h-5/6 flex flex-col justify-between'
 						onInteractOutside={(e) => {
 							e.preventDefault()
 						}}
