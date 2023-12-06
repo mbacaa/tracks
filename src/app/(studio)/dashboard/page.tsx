@@ -20,7 +20,7 @@ export default async function Dashboard() {
 					myTracks.map((track, index) => (
 						<div className='relative'>
 							<TrackArtwork
-								key={index}
+								key={track.id}
 								track={track}
 								className='w-[220px]'
 								aspectRatio='square'
