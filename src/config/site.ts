@@ -14,9 +14,9 @@ export const siteConfig = {
 			title: 'Explore',
 			items: [
 				{
-					title: 'Beats',
-					href: '/beats',
-					description: 'All the beats you need.',
+					title: 'Tracks',
+					href: '/tracks',
+					description: 'All the tracks you need.',
 					items: [],
 				},
 				{

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import TrackArtwork from './TrackArtwork'
-import { Button, buttonVariants } from './ui/button'
+import { buttonVariants } from './ui/button'
 import { ScrollArea, ScrollBar } from './ui/scroll-area'
 import { api } from '@/trpc/server'
 import { Icons } from './Icons'
@@ -15,7 +15,7 @@ export default async function FeaturedTracks() {
 					<h2 className='font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl'>
 						Featured Tracks
 					</h2>
-					<p className='mt-2 text-muted-foreground/60'>
+					<p className='mt-2 text-muted-foreground'>
 						Here&apos;s a selection of our favorites.
 					</p>
 				</div>
