@@ -60,4 +60,10 @@ export const tracksRouter = createTRPCRouter({
 				userId,
 			})
 		}),
+
+	deleteTrack: protectedProcedure
+		.input(z.object({ id: z.number() }))
+		.mutation(async ({ input }) => {
+			return await db.delete(tracks).where(eq(tracks.id, input.id))
+		}),
 })

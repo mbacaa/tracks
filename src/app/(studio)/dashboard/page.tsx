@@ -1,7 +1,8 @@
+import { api } from '@/trpc/server'
+import DeleteTrackButton from '@/components/DeleteTrackButton'
 import { Icons } from '@/components/Icons'
 import TrackArtwork from '@/components/TrackArtwork'
 import UploadTrackForm from '@/components/UploadTrackForm/UploadTrackForm'
-import { api } from '@/trpc/server'
 
 export default async function Dashboard() {
 	const myTracks = await api.tracks.getUsersTracks.query()
@@ -17,14 +18,21 @@ export default async function Dashboard() {
 			<section className='mt-8 flex flex-wrap gap-8 justify-center md:justify-start'>
 				{myTracks && myTracks.length > 0 ? (
 					myTracks.map((track, index) => (
-						<TrackArtwork
-							key={index}
-							track={track}
-							className='w-[220px]'
-							aspectRatio='square'
-							width={220}
-							height={220}
-						/>
+						<div className='relative'>
+							<TrackArtwork
+								key={index}
+								track={track}
+								className='w-[220px]'
+								aspectRatio='square'
+								width={220}
+								height={220}
+							/>
+							<DeleteTrackButton
+								key={index}
+								trackId={track.id}
+								title={track.title}
+							/>
+						</div>
 					))
 				) : (
 					<h3 className='mt-24 w-full h-full flex flex-col justify-center items-center font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl text-center text-muted-foreground/20'>

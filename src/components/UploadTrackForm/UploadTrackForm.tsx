@@ -46,7 +46,7 @@ export default function UploadTrackForm() {
 		},
 	})
 
-	const { mutate: uploadTrack, isLoading } = api.tracks.createTrack.useMutation(
+	const { mutate: createTrack, isLoading } = api.tracks.createTrack.useMutation(
 		{
 			onSuccess: () => {
 				router.refresh()
@@ -65,7 +65,7 @@ export default function UploadTrackForm() {
 			return
 		}
 
-		uploadTrack(data)
+		createTrack(data)
 	}
 
 	return (

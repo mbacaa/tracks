@@ -22,7 +22,7 @@ import {
 import { Input } from '../ui/input'
 import { Icons } from '../Icons'
 import { cn } from '@/lib/utils'
-import TrackArtwork from '../TrackArtwork'
+import TrackArtworkPreview from '../TrackArtworkPreview'
 
 interface ReviewCardProps {
 	form: UseFormReturn<z.infer<typeof trackUploadSchema>>
@@ -87,7 +87,7 @@ export default function ReviewCard({
 					</div>
 					<div className='flex flex-col gap-4 md:ml-12 items-center sm:items-end'>
 						{/*Preview Artwork*/}
-						<TrackArtwork
+						<TrackArtworkPreview
 							track={{
 								title: form.getValues().title,
 								imageUrl: form.getValues().imageUrl,

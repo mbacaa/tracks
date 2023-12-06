@@ -37,14 +37,13 @@ export default function MobileNav({ name, items }: MainNavProps) {
 				</SheetTrigger>
 				<SheetContent side='left'>
 					<SheetHeader>
-						<SheetTitle
-							onClick={() => setIsOpen(false)}
-							className='flex items-center mb-8'
-						>
-							<Icons.logo className='h-6 w-6' aria-hidden='true' />
-							<span className='ml-2 text-lg font-bold tracking-tighter'>
-								{name}
-							</span>
+						<SheetTitle onClick={() => setIsOpen(false)}>
+							<Link href='/' className='flex items-center mb-8'>
+								<Icons.logo className='h-6 w-6' aria-hidden='true' />
+								<span className='ml-2 text-lg font-bold tracking-tighter'>
+									{name}
+								</span>
+							</Link>
 						</SheetTitle>
 						<SheetDescription>
 							<Accordion
@@ -58,7 +57,7 @@ export default function MobileNav({ name, items }: MainNavProps) {
 											<AccordionTrigger className='text-foreground'>
 												{item.title}
 											</AccordionTrigger>
-											<AccordionContent className='flex flex-col gap-2 justify-start'>
+											<AccordionContent className='flex flex-col gap-4 justify-start'>
 												<div className='flex flex-col space-y-2'>
 													{item.items?.map((subItem, key) =>
 														subItem.href ? (
