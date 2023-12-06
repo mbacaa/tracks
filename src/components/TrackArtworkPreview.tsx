@@ -30,7 +30,7 @@ export default function TrackArtwork({
 		<div className={cn('space-y-3', className)} {...props}>
 			<ContextMenu>
 				<ContextMenuTrigger>
-					<div className='group relative overflow-hidden rounded-md'>
+					<div className='group relative overflow-hidden rounded-md border'>
 						{track.imageUrl && track.imageUrl !== '' ? (
 							<Image
 								src={track.imageUrl}

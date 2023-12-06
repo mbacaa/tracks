@@ -43,7 +43,7 @@ export default function TrackArtwork({
 			<ContextMenu>
 				<ContextMenuTrigger>
 					<Link href={`/tracks/${track.id}`}>
-						<div className='group relative overflow-hidden rounded-md'>
+						<div className='group relative overflow-hidden rounded-md border'>
 							{track.imageUrl && track.imageUrl !== '' ? (
 								<Image
 									src={track.imageUrl}
@@ -51,7 +51,7 @@ export default function TrackArtwork({
 									width={width}
 									height={height}
 									className={cn(
-										'object-cover transition-all duration-200 ease-in-out transform group-hover:scale-105 border',
+										'object-cover transition-all duration-200 ease-in-out transform group-hover:scale-105',
 										aspectRatio === 'portrait'
 											? 'aspect-[3/4]'
 											: 'aspect-square'
