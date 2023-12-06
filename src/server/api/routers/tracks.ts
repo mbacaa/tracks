@@ -29,6 +29,27 @@ export const tracksRouter = createTRPCRouter({
 		})
 	}),
 
+	getLatestTracks: publicProcedure
+		.input(z.object({ amount: z.number().min(1) }))
+		.query(async ({ input }) => {
+			const result = await db
+				.select({
+					track: tracks,
+					user: users,
+				})
+				.from(tracks)
+				.leftJoin(users, eq(tracks.userId, users.id))
+				.orderBy(desc(tracks.releaseDate))
+				.limit(input.amount)
+
+			return result.map((row) => {
+				return {
+					...row.track,
+					username: row.user?.name ?? 'Unknown',
+				}
+			})
+		}),
+
 	createTrack: protectedProcedure
 		.input(insertTrackSchema)
 		.mutation(async ({ ctx, input }) => {
