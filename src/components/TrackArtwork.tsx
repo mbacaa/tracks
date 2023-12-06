@@ -2,11 +2,14 @@ import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
 import { ContextMenu, ContextMenuTrigger } from '@/components/ui/context-menu'
-import type { Track } from '@/types/tracks'
+import type { TrackWithUsername } from '@/types/tracks'
 import { Icons } from './Icons'
 
 interface TrackArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
-	track: Partial<Track>
+	track: Pick<
+		TrackWithUsername,
+		'releaseDate' | 'imageUrl' | 'price' | 'bpm' | 'key' | 'title' | 'username'
+	>
 	aspectRatio?: 'portrait' | 'square'
 	width?: number
 	height?: number
@@ -71,10 +74,9 @@ export default function TrackArtwork({
 			<div>
 				<div className='space-y-1 text-sm'>
 					<h3 className='font-medium leading-none truncate'>{track.title}</h3>
-					<p className='text-xs text-muted-foreground'>
-						{/* {track.artist} */}
-						track.artist
-					</p>
+					{track.username ? (
+						<p className='text-xs text-muted-foreground'>{track.username}</p>
+					) : null}
 				</div>
 			</div>
 		</div>

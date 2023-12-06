@@ -10,15 +10,23 @@ import { desc, eq } from 'drizzle-orm'
 import { insertTrackSchema } from '@/server/db/schema'
 
 export const tracksRouter = createTRPCRouter({
-	getAllTracks: publicProcedure.query(async () => {
-		return db.select().from(tracks)
-	}),
 	getUsersTracks: protectedProcedure.query(async ({ ctx }) => {
-		return db
-			.select()
+		const result = await db
+			.select({
+				track: tracks,
+				user: users,
+			})
 			.from(tracks)
+			.leftJoin(users, eq(tracks.userId, users.id))
 			.where(eq(tracks.userId, ctx.session.user.id))
 			.orderBy(desc(tracks.releaseDate))
+
+		return result.map((row) => {
+			return {
+				...row.track,
+				username: row.user?.name ?? 'Unknown',
+			}
+		})
 	}),
 
 	createTrack: protectedProcedure

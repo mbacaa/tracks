@@ -1,7 +1,24 @@
-export default function Account() {
+import UserAccountForm from '@/components/UserAccountForm'
+import { getUserAuth } from '@/server/auth'
+import { redirect } from 'next/navigation'
+
+export default async function Account() {
+	const user = await getUserAuth()
+
+	if (!user) {
+		redirect('/login')
+	}
+
 	return (
-		<h2 className='font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl'>
-			Account
-		</h2>
+		<main>
+			<section className='flex justify-between items-center border-b pb-8'>
+				<h2 className='font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl'>
+					Account
+				</h2>
+			</section>
+			<section className='mt-8'>
+				<UserAccountForm user={user} />
+			</section>
+		</main>
 	)
 }

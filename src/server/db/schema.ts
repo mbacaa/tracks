@@ -40,6 +40,8 @@ export const users = pgTable('user', {
 	image: text('image'),
 })
 
+export const insertUserSchema = createInsertSchema(users)
+
 export const accounts = pgTable(
 	'account',
 	{

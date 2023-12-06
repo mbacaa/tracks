@@ -5,6 +5,8 @@ import { trackTypes, genres, moods, keys } from '@/config/tracks'
 export type Track = z.infer<typeof selectTrackSchema>
 export type NewTrack = z.infer<typeof insertTrackSchema>
 
+export type TrackWithUsername = Track & { username?: string }
+
 export type trackTypes = (typeof trackTypes)[keyof typeof trackTypes]
 export type genres = (typeof genres)[keyof typeof genres]
 export type moods = (typeof moods)[keyof typeof moods]
