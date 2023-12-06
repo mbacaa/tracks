@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 
 export default async function Account() {
 	const user = await getUserAuth()
+	await new Promise((resolve) => setTimeout(resolve, 1000))
 
 	if (!user) {
 		redirect('/login')
@@ -16,7 +17,7 @@ export default async function Account() {
 					Account
 				</h2>
 			</section>
-			<section className='mt-8'>
+			<section className='mt-8 '>
 				<UserAccountForm user={user} />
 			</section>
 		</main>
