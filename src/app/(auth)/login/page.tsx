@@ -1,15 +1,9 @@
-import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import UserAuthForm from '@/components/UserAuthForm'
 import { Icons } from '@/components/Icons'
-
-export const metadata: Metadata = {
-	title: 'Login',
-	description: 'Login to your account',
-}
+import UserAuthForm from '@/components/UserAuthForm'
 
 export default function LoginPage() {
 	return (
