@@ -11,7 +11,7 @@ export default async function Dashboard() {
 				<h2 className='font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl'>
 					Your Tracks
 				</h2>
-				<Button>
+				<Button className='w-30'>
 					<Icons.plus className='w-4 h-4 mr-2' />
 					Upload new beat
 				</Button>

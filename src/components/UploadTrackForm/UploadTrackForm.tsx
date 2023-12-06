@@ -73,7 +73,7 @@ export default function UploadTrackForm() {
 			<Form {...form}>
 				<Dialog>
 					<DialogTrigger asChild>
-						<Button>
+						<Button className='w-30'>
 							<Icons.plus className='w-4 h-4 mr-2' />
 							Upload new track
 						</Button>

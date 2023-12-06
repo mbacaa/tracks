@@ -67,10 +67,10 @@ export default function UserAccountForm({ user }: UserAccountFormProps) {
 			<form onSubmit={form.handleSubmit(onSubmit)} className='w-full space-y-6'>
 				<Card>
 					<CardHeader>
-						<CardTitle>Your (Artist) Name</CardTitle>
+						<CardTitle>Your (Art) Name</CardTitle>
 						<CardDescription>
-							Please enter your display name you are comfortable with. This will
-							be visible to other users.
+							Choose a name that reflects your identity. This will be visible to
+							others.
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
