@@ -18,9 +18,12 @@ import { Button, buttonVariants } from '@/components/ui/button'
 export default function TrackPage() {
 	const params = useParams()
 
-	const { data: track } = api.tracks.getTrackById.useQuery({
-		trackId: Number(params.trackId),
-	})
+	const { data: track } = api.tracks.getTrackById.useQuery(
+		{
+			trackId: Number(params.trackId),
+		},
+		{ suspense: true }
+	)
 
 	const formattedDate = track?.releaseDate?.toLocaleDateString('en-US', {
 		day: 'numeric',

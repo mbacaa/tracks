@@ -6,16 +6,7 @@ import {
 import { db } from '@/server/db'
 import { tracks, users } from '@/server/db/schema'
 import { z } from 'zod'
-import {
-	Column,
-	ColumnBaseConfig,
-	ColumnDataType,
-	and,
-	desc,
-	eq,
-	ne,
-	notInArray,
-} from 'drizzle-orm'
+import { and, desc, eq, ne } from 'drizzle-orm'
 import { insertTrackSchema } from '@/server/db/schema'
 import { TRPCError } from '@trpc/server'
 
