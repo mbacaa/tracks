@@ -6,8 +6,18 @@ import {
 import { db } from '@/server/db'
 import { tracks, users } from '@/server/db/schema'
 import { z } from 'zod'
-import { and, desc, eq, ne, notInArray } from 'drizzle-orm'
+import {
+	Column,
+	ColumnBaseConfig,
+	ColumnDataType,
+	and,
+	desc,
+	eq,
+	ne,
+	notInArray,
+} from 'drizzle-orm'
 import { insertTrackSchema } from '@/server/db/schema'
+import { TRPCError } from '@trpc/server'
 
 export const tracksRouter = createTRPCRouter({
 	getTrackById: publicProcedure
@@ -88,65 +98,22 @@ export const tracksRouter = createTRPCRouter({
 				with: { user: true },
 			})
 
-			if (!selectedTrack) return []
+			if (!selectedTrack) throw new TRPCError({ code: 'NOT_FOUND' })
 
 			const relatedTracks = await db.query.tracks.findMany({
 				where: and(
 					ne(tracks.id, trackId),
-					eq(tracks.userId, selectedTrack.userId)
+					eq(tracks.genre, selectedTrack.genre)
 				),
+
 				with: { user: true },
+				limit: amount,
 			})
 
-			if (relatedTracks.length < amount && relatedTracks.length > 0) {
-				const moreTracks = await db.query.tracks.findMany({
-					where: and(
-						notInArray(
-							tracks.id,
-							relatedTracks.map((t) => t.id)
-						),
-						eq(tracks.genre, selectedTrack.genre)
-					),
-					with: { user: true },
-					limit: amount - relatedTracks.length,
-				})
-				relatedTracks.push(...moreTracks)
-			} else if (relatedTracks.length === 0) {
-				const moreTracks = await db.query.tracks.findMany({
-					where: eq(tracks.genre, selectedTrack.genre),
-					with: { user: true },
-					limit: amount,
-				})
-				relatedTracks.push(...moreTracks)
-			}
-
-			if (relatedTracks.length < amount && relatedTracks.length > 0) {
-				const moreTracks = await db.query.tracks.findMany({
-					where: and(
-						notInArray(
-							tracks.id,
-							relatedTracks.map((t) => t.id)
-						),
-						eq(tracks.mood, selectedTrack.mood)
-					),
-					with: { user: true },
-					limit: amount - relatedTracks.length,
-				})
-				relatedTracks.push(...moreTracks)
-			} else if (relatedTracks.length === 0) {
-				const moreTracks = await db.query.tracks.findMany({
-					where: eq(tracks.mood, selectedTrack.mood),
-					with: { user: true },
-					limit: amount,
-				})
-				relatedTracks.push(...moreTracks)
-			}
-
-			return relatedTracks.map((track) => {
-				return {
-					...track,
-				}
-			})
+			return relatedTracks.map((track) => ({
+				...track,
+				username: track.user?.name ?? 'Unknown',
+			}))
 		}),
 
 	createTrack: protectedProcedure
