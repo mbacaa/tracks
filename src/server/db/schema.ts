@@ -9,6 +9,7 @@ import {
 	serial,
 	varchar,
 } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm'
 import { type AdapterAccount } from 'next-auth/adapters'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { trackMetadataArrays } from '@/config/tracks'
@@ -101,6 +102,13 @@ export const tracks = pgTable('tracks', {
 	price: doublePrecision('price').default(0.0),
 	releaseDate: timestamp('releaseDate').defaultNow(),
 })
+
+export const tracksRelations = relations(tracks, ({ one }) => ({
+	user: one(users, {
+		fields: [tracks.userId],
+		references: [users.id],
+	}),
+}))
 
 export const selectTrackSchema = createSelectSchema(tracks)
 export const insertTrackSchema = createInsertSchema(tracks).omit({

@@ -103,7 +103,7 @@ export default function TrackArtwork({
 								href={track.id ? `artists/${track.userId}` : `artists/`}
 								as={track.id ? `artists/${track.userId}` : `artists/`}
 							>
-								{track.title}
+								{track.username ?? 'Unknown Artist'}
 							</Link>
 						</p>
 					) : null}

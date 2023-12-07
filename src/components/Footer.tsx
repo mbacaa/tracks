@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 
 export default function Footer() {
 	return (
-		<footer className='border-t py-2'>
+		<footer className='border-t p-2'>
 			<div className='container w-full flex items-center justify-between'>
 				<div className='flex items-center'>
 					<Link href='/' className='flex items-center space-x-2'>
