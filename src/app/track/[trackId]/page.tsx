@@ -114,7 +114,7 @@ export default function TrackPage() {
 						</h2>
 						<h3 className='text-muted-foreground'>
 							<Link
-								href={`/artists/${track?.username}`}
+								href={`/artist/${track?.username}`}
 								className={cn(
 									buttonVariants({ variant: 'link', size: 'sm' }),
 									'text-muted-foreground text-sm p-0 truncate'

@@ -42,7 +42,7 @@ export default function TrackArtwork({
 		<div className={cn('space-y-3', className)} {...props}>
 			<ContextMenu>
 				<ContextMenuTrigger>
-					<Link href={`/tracks/${track.id}`}>
+					<Link href={`/track/${track.id}`}>
 						<div className='group relative overflow-hidden rounded-md border'>
 							{track.imageUrl && track.imageUrl !== '' ? (
 								<Image
@@ -91,8 +91,8 @@ export default function TrackArtwork({
 				<div className='space-y-1 text-sm'>
 					<h3 className='font-medium leading-none truncate'>
 						<Link
-							href={track.id ? `tracks/${track.id}` : `tracks/`}
-							as={track.id ? `tracks/${track.id}` : `tracks/`}
+							href={track.id ? `track/${track.id}` : `tracks/`}
+							as={track.id ? `track/${track.id}` : `tracks/`}
 						>
 							{track.title}
 						</Link>
@@ -100,8 +100,8 @@ export default function TrackArtwork({
 					{track.username ? (
 						<p className='text-xs text-muted-foreground'>
 							<Link
-								href={track.id ? `artists/${track.userId}` : `artists/`}
-								as={track.id ? `artists/${track.userId}` : `artists/`}
+								href={track.id ? `artist/${track.userId}` : `artists/`}
+								as={track.id ? `artist/${track.userId}` : `artists/`}
 							>
 								{track.username ?? 'Unknown Artist'}
 							</Link>
