@@ -14,8 +14,6 @@ export const tracksRouter = createTRPCRouter({
 	getTrackById: publicProcedure
 		.input(z.object({ trackId: z.number() }))
 		.query(async ({ input }) => {
-			await new Promise((resolve) => setTimeout(resolve, 1000))
-
 			const result = await db
 				.select({
 					track: tracks,
