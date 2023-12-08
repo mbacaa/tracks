@@ -10,6 +10,7 @@ import {
 	CreditCard,
 	Ghost,
 	Grid2x2,
+	Headphones,
 	Laptop,
 	Loader2,
 	LogOut,
@@ -17,6 +18,8 @@ import {
 	Menu,
 	Moon,
 	Music2,
+	Play,
+	PlayCircle,
 	Plus,
 	ShoppingCart,
 	Smile,
@@ -89,4 +92,6 @@ export const Icons = {
 	trash: Trash2,
 	mood: Smile,
 	cart: ShoppingCart,
+	play: Play,
+	headphones: Headphones,
 }
