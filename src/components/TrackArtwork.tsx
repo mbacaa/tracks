@@ -88,7 +88,7 @@ export default function TrackArtwork({
 				</ContextMenuTrigger>
 			</ContextMenu>
 			<div>
-				<div className='space-y-1 text-sm'>
+				<div className='space-y-1 text-sm pr-8'>
 					<h3 className='font-medium leading-none truncate'>
 						<Link
 							href={track.id ? `track/${track.id}` : `tracks/`}

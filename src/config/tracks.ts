@@ -8,6 +8,7 @@ export const trackTypes = {
 export const genres = {
 	pop: 'Pop',
 	techno: 'Techno',
+	drill: 'Drill',
 	rock: 'Rock',
 	hiphop: 'Hiphop',
 	edm: 'EDM',
@@ -22,6 +23,14 @@ export const genres = {
 	house: 'House',
 	dubstep: 'Dubstep',
 	latin: 'Latin',
+	hyperpop: 'Hyperpop',
+	rage: 'Rage',
+	oldSchool: 'Old School',
+	electronic: 'Electronic',
+	kpop: 'Kpop',
+	orchestral: 'Orchestral',
+	reggae: 'Reggae',
+	reggaeton: 'Reggaeton',
 } as const
 export const moods = {
 	happy: 'Happy',
@@ -33,6 +42,14 @@ export const moods = {
 	dark: 'Dark',
 	romantic: 'Romantic',
 	inspiring: 'Inspiring',
+	determined: 'Determined',
+	rebellious: 'Rebellious',
+	grateful: 'Grateful',
+	peaceful: 'Peaceful',
+	accomplished: 'Accomplished',
+	lonely: 'Lonely',
+	confident: 'Confident',
+	soulful: 'Soulful',
 } as const
 export const keys = {
 	c: 'C',
@@ -47,6 +64,18 @@ export const keys = {
 	a: 'A',
 	aSharp: 'A#',
 	b: 'B',
+	cMinor: 'Cm',
+	cSharpMinor: 'C#m',
+	dMinor: 'Dm',
+	dSharpMinor: 'D#m',
+	eMinor: 'Em',
+	fMinor: 'Fm',
+	fSharpMinor: 'F#m',
+	gMinor: 'Gm',
+	gSharpMinor: 'G#m',
+	aMinor: 'Am',
+	aSharpMinor: 'A#m',
+	bMinor: 'Bm',
 } as const
 
 export const trackMetadataArrays = {

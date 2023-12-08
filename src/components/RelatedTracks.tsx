@@ -6,6 +6,7 @@ import { buttonVariants } from './ui/button'
 import { ScrollArea, ScrollBar } from './ui/scroll-area'
 import { api } from '@/trpc/react'
 import { Icons } from './Icons'
+import { CAROUSEL_QUERY_LIMIT } from '@/config/query-limits'
 
 interface RelatedTracksProps {
 	trackId: number
@@ -14,7 +15,7 @@ interface RelatedTracksProps {
 export default function RelatedTracks({ trackId }: RelatedTracksProps) {
 	const { data: relatedTracks, isLoading } =
 		api.tracks.getRelatedTracks.useQuery({
-			amount: 10,
+			amount: CAROUSEL_QUERY_LIMIT,
 			trackId: trackId,
 		})
 

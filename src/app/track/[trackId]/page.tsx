@@ -55,7 +55,7 @@ export default function TrackPage() {
 	]
 
 	return (
-		<main className='h-full md:w-2/3 mx-auto py-4 space-y-4'>
+		<main className='h-full mx-auto py-4 space-y-4'>
 			<section className='flex items-center gap-2 text-muted-foreground'>
 				<Link
 					href={`/tracks`}
@@ -85,14 +85,14 @@ export default function TrackPage() {
 					{track?.title}
 				</Button>
 			</section>
-			<section className='flex flex-col lg:flex-row gap-12 md:gap-24 lg:gap-32 justify-center sm:justify-start'>
-				<div className='w-fit justify-center'>
+			<section className='w-full flex flex-col lg:flex-row gap-12 md:gap-24 lg:gap-32 justify-center md:justify-start'>
+				<div className='min-w-fit'>
 					{track?.imageUrl && track.imageUrl !== '' ? (
 						<Image
 							src={track.imageUrl}
 							alt={'Track Artwork Image'}
 							width={400}
-							height={400}
+							height={525}
 							className='object-cover transition-all duration-200 ease-in-out transform group-hover:scale-105 aspect-[3/4] rounded-md border'
 						/>
 					) : (
@@ -107,9 +107,9 @@ export default function TrackPage() {
 						/>
 					)}
 				</div>
-				<div className='flex-1 flex flex-col gap-8'>
-					<div>
-						<h2 className='font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl truncate'>
+				<div className='w-full flex flex-col gap-4'>
+					<div className='w-full'>
+						<h2 className='max-w-3xl font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl truncate'>
 							{track?.title}
 						</h2>
 						<h3 className='text-muted-foreground'>
@@ -138,10 +138,10 @@ export default function TrackPage() {
 						</Button>
 					</div>
 
-					<Accordion type='multiple' className='w-full'>
+					<Accordion type='multiple'>
 						<AccordionItem value='item-1'>
 							<AccordionTrigger>About</AccordionTrigger>
-							<AccordionContent className='text-sm text-muted-foreground'>
+							<AccordionContent className='max-w-3xl text-sm text-muted-foreground'>
 								{track?.description}
 							</AccordionContent>
 						</AccordionItem>
