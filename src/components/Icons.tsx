@@ -2,8 +2,10 @@ import {
 	Activity,
 	AudioLines,
 	Check,
+	ChevronDown,
 	ChevronLeft,
 	ChevronRight,
+	ChevronUp,
 	ChevronsUpDown,
 	CircleUser,
 	Clock,
@@ -12,6 +14,7 @@ import {
 	Grid2x2,
 	Headphones,
 	Laptop,
+	ListFilter,
 	Loader2,
 	LogOut,
 	LucideProps,
@@ -19,14 +22,13 @@ import {
 	Moon,
 	Music2,
 	Play,
-	PlayCircle,
 	Plus,
 	ShoppingCart,
 	Smile,
 	Sun,
 	Trash2,
 	UploadCloud,
-	User,
+	User
 } from 'lucide-react'
 
 export const Icons = {
@@ -94,4 +96,7 @@ export const Icons = {
 	cart: ShoppingCart,
 	play: Play,
 	headphones: Headphones,
+	filter: ListFilter,
+	up: ChevronUp,
+	down: ChevronDown,
 }

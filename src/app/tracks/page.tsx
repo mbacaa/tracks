@@ -2,8 +2,23 @@ import TracksTable from '@/components/TracksTable/TracksTable'
 import TracksTableToolbar from '@/components/TracksTable/TracksTableToolbar'
 import { api } from '@/trpc/server'
 
-export default async function TracksPage() {
-	const tracks = await api.tracks.getLatestTracks.query({ amount: 10 })
+interface TracksPageProps {
+	searchParams: {
+		[key: string]: string | undefined
+	}
+}
+
+export default async function TracksPage({ searchParams }: TracksPageProps) {
+	const { genres, moods, sort } = searchParams
+
+	const tracks = await api.tracks.getTracksBySearchParams.query({
+		searchParams: {
+			genres: genres,
+			moods: moods,
+			sort: sort,
+			amount: 10,
+		},
+	})
 
 	return (
 		<main className='flex flex-col gap-4'>

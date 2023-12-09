@@ -1,9 +1,9 @@
 import { TrackWithUsername } from '@/types/tracks'
 import Image from 'next/image'
+
 import TracksTablePlayButton from './TracksPlayButton'
 import { Icons } from '../Icons'
 import AddToCartButton from '../AddToCartButton'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
 import Link from 'next/link'
 
 interface TracksTableItemProps {
@@ -22,7 +22,7 @@ interface TracksTableItemProps {
 	index: number
 }
 
-export default function TracksTableItem({
+export default async function TracksTableItem({
 	track,
 	index,
 }: TracksTableItemProps) {

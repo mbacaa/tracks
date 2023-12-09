@@ -86,3 +86,21 @@ export const trackMetadataArrays = {
 	moods: Object.keys(moods).map((key) => moods[key as keyof typeof moods]),
 	keys: Object.keys(keys).map((key) => keys[key as keyof typeof keys]),
 }
+
+export const sortOptions = [
+	{ label: 'Date: Old to new', value: 'asc(releaseDate)' },
+	{
+		label: 'Date: New to old',
+		value: 'desc(releaseDate)',
+	},
+	{ label: 'Price: Low to high', value: 'asc(price)' },
+	{ label: 'Price: High to low', value: 'desc(price)' },
+	{
+		label: 'Alphabetical: A to Z',
+		value: 'asc(title)',
+	},
+	{
+		label: 'Alphabetical: Z to A',
+		value: 'desc(title)',
+	},
+]

@@ -35,22 +35,22 @@ export default function TrackPage() {
 		{
 			title: 'Release Date',
 			value: formattedDate,
-			icon: <Icons.date className='w-3 h-3 mr-1' />,
+			icon: <Icons.date className='w-3 h-3 mr-2' />,
 		},
 		{
 			title: 'BPM',
 			value: track?.bpm,
-			icon: <Icons.bpm className='w-3 h-3 mr-1' />,
+			icon: <Icons.bpm className='w-3 h-3 mr-2' />,
 		},
 		{
 			title: 'Key',
 			value: track?.key,
-			icon: <Icons.key className='w-3 h-3 mr-1' />,
+			icon: <Icons.key className='w-3 h-3 mr-2' />,
 		},
 		{
 			title: 'Mood',
 			value: track?.mood,
-			icon: <Icons.mood className='w-3 h-3 mr-1' />,
+			icon: <Icons.mood className='w-3 h-3 mr-2' />,
 		},
 	]
 
@@ -146,7 +146,7 @@ export default function TrackPage() {
 							</AccordionContent>
 						</AccordionItem>
 						<AccordionItem value='item-2'>
-							<AccordionTrigger>Information</AccordionTrigger>
+							<AccordionTrigger>Metadata</AccordionTrigger>
 							<AccordionContent>
 								<div className='flex flex-col gap-1 text-sm text-muted-foreground'>
 									{trackMetadata.map((item, index) =>

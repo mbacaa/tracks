@@ -6,7 +6,7 @@ import {
 import { db } from '@/server/db'
 import { tracks, users } from '@/server/db/schema'
 import { z } from 'zod'
-import { and, desc, eq, ne } from 'drizzle-orm'
+import { and, or, eq, ne, desc, asc, inArray } from 'drizzle-orm'
 import { insertTrackSchema } from '@/server/db/schema'
 import { TRPCError } from '@trpc/server'
 
@@ -104,6 +104,66 @@ export const tracksRouter = createTRPCRouter({
 			return relatedTracks.map((track) => ({
 				...track,
 				username: track.user?.name ?? 'Unknown',
+			}))
+		}),
+
+	getTracksBySearchParams: publicProcedure
+		.input(
+			z.object({
+				searchParams: z.object({
+					genres: z.string().or(z.undefined()),
+					moods: z.string().or(z.undefined()),
+					sort: z.string().or(z.undefined()),
+					amount: z.number().min(1),
+				}),
+			})
+		)
+		.query(async ({ input }) => {
+			const { genres, moods, sort, amount } = input.searchParams
+
+			const genreArray = genres ? genres.split(',') : []
+			const moodArray = moods ? moods.split(',') : []
+			const sortString = sort ? sort : 'desc(tracks.releaseDate)'
+
+			const sortStringToDrizzleSyntax = (sortString: string) => {
+				switch (sortString) {
+					case 'asc(releaseDate)':
+						return asc(tracks.releaseDate)
+					case 'desc(releaseDate)':
+						return desc(tracks.releaseDate)
+					case 'asc(price)':
+						return asc(tracks.price)
+					case 'desc(price)':
+						return desc(tracks.price)
+					case 'asc(title)':
+						return asc(tracks.title)
+					case 'desc(title)':
+						return desc(tracks.title)
+					default:
+						return desc(tracks.releaseDate)
+				}
+			}
+
+			const conditions = []
+
+			genreArray.length > 0 &&
+				conditions.push(inArray(tracks.genre, genreArray))
+			moodArray.length > 0 && conditions.push(inArray(tracks.mood, moodArray))
+
+			const result = await db
+				.select({
+					track: tracks,
+					user: users,
+				})
+				.from(tracks)
+				.leftJoin(users, eq(tracks.userId, users.id))
+				.where(or(...conditions))
+				.orderBy(sortStringToDrizzleSyntax(sortString))
+				.limit(amount)
+
+			return result.map((row) => ({
+				...row.track,
+				username: row.user?.name ?? 'Unknown',
 			}))
 		}),
 

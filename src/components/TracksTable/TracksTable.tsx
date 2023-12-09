@@ -5,7 +5,7 @@ interface TracksTableProps {
 	tracks: TrackWithUsername[]
 }
 
-export default function TracksTable({ tracks }: TracksTableProps) {
+export default async function TracksTable({ tracks }: TracksTableProps) {
 	return (
 		<div className='flex flex-col'>
 			{tracks.map((track, index) => (

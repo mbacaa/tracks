@@ -66,7 +66,7 @@ export default function ComboboxFormField({
 							<PopoverContent side='bottom' className='w-[200px] p-0'>
 								<Command>
 									<CommandInput placeholder={`Search ${fieldName}...`} />
-									<CommandEmpty>No language found.</CommandEmpty>
+									<CommandEmpty>No ${fieldName} found.</CommandEmpty>
 									<CommandGroup>
 										<ScrollArea className='h-32 whitespace-nowrap'>
 											{items.map((item) => (
