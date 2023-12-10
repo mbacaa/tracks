@@ -28,7 +28,8 @@ import {
 	Sun,
 	Trash2,
 	UploadCloud,
-	User
+	User,
+	X,
 } from 'lucide-react'
 
 export const Icons = {
@@ -99,4 +100,5 @@ export const Icons = {
 	filter: ListFilter,
 	up: ChevronUp,
 	down: ChevronDown,
+	x: X,
 }

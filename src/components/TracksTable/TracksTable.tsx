@@ -7,7 +7,7 @@ interface TracksTableProps {
 
 export default async function TracksTable({ tracks }: TracksTableProps) {
 	return (
-		<div className='flex flex-col'>
+		<div className='flex flex-col gap-4 md:gap-0'>
 			{tracks.map((track, index) => (
 				<TracksTableItem key={index} index={index + 1} track={track} />
 			))}

@@ -2,7 +2,7 @@
 
 import { sortOptions, trackMetadataArrays } from '@/config/tracks'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -15,7 +15,6 @@ import {
 	Sheet,
 	SheetContent,
 	SheetDescription,
-	SheetFooter,
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
@@ -30,11 +29,19 @@ import {
 	CommandInput,
 	CommandItem,
 } from '../ui/command'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Label } from '../ui/label'
 
 export default function TracksTableToolbar() {
+	const [selectedSort, setSelectedSort] = useState<string>('')
 	const [selectedGenres, setSelectedGenres] = useState<string[]>([])
 	const [selectedMoods, setSelectedMoods] = useState<string[]>([])
-	const [selectedSort, setSelectedSort] = useState<string>('')
+	const [selectedType, setSelectedType] = useState<string>('')
+	const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+
+	const [allFilters, setAllFilters] = useState<string[]>([])
+	const [isSortPopoverOpen, setIsSortPopoverOpen] = useState<boolean>(false)
+	const [isTypePopoverOpen, setIsTypePopoverOpen] = useState<boolean>(false)
 
 	const router = useRouter()
 	const pathname = usePathname()
@@ -59,9 +66,24 @@ export default function TracksTableToolbar() {
 		})
 	}
 
-	const handleSortChange = (sort: string) => {
+	const handleSortChange = async (sort: string) => {
 		setSelectedSort(sort)
-		handleApplyFilters()
+		setIsSortPopoverOpen(false)
+	}
+
+	const handleTypeChange = (type: string) => {
+		setSelectedType(type)
+		setIsTypePopoverOpen(false)
+	}
+
+	const handleKeysChange = (key: string) => {
+		setSelectedKeys((prevKeys) => {
+			if (prevKeys.includes(key)) {
+				return prevKeys.filter((selectedKey) => selectedKey !== key)
+			} else {
+				return [...prevKeys, key]
+			}
+		})
 	}
 
 	const handleApplyFilters = () => {
@@ -75,12 +97,26 @@ export default function TracksTableToolbar() {
 			params.append('moods', selectedMoods.join(','))
 		}
 
+		if (selectedType !== '') {
+			params.append('type', selectedType)
+		}
+
+		if (selectedKeys.length > 0) {
+			params.append('keys', selectedKeys.join(','))
+		}
+
 		if (selectedSort !== '') {
 			if (params.has('sort')) {
 				params.delete('sort')
 			}
-
 			params.append('sort', selectedSort)
+			setAllFilters([
+				...selectedGenres,
+				...selectedMoods,
+				selectedSort,
+				selectedType,
+				...selectedKeys,
+			])
 		}
 
 		router.push(`${pathname}?${params.toString()}`, {
@@ -88,9 +124,40 @@ export default function TracksTableToolbar() {
 		})
 	}
 
+	useEffect(() => {
+		handleApplyFilters()
+	}, [selectedSort, selectedGenres, selectedMoods, selectedType, selectedKeys])
+
+	const handleClearFilters = () => {
+		setSelectedGenres([])
+		setSelectedMoods([])
+		setSelectedKeys([])
+		setSelectedSort('')
+		setSelectedType('')
+		setAllFilters([])
+
+		router.push(`${pathname}`, {
+			scroll: false,
+		})
+	}
+
 	return (
-		<div className='flex gap-2'>
-			<Popover modal={true}>
+		<div className='flex flex-col md:flex-row gap-2'>
+			{allFilters.length > 0 && (
+				<Button
+					onClick={() => handleClearFilters()}
+					variant='outline'
+					size='sm'
+				>
+					<Icons.x className='w-4 h-4 mr-2' />
+					Clear Filters
+				</Button>
+			)}
+			<Popover
+				modal={true}
+				open={isSortPopoverOpen}
+				onOpenChange={() => setIsSortPopoverOpen(!isSortPopoverOpen)}
+			>
 				<PopoverTrigger asChild>
 					<Button
 						variant='outline'
@@ -117,9 +184,7 @@ export default function TracksTableToolbar() {
 									<CommandItem
 										value={item.value}
 										key={index}
-										onSelect={() => {
-											handleSortChange(item.value)
-										}}
+										onSelect={() => handleSortChange(item.value)}
 									>
 										<Icons.check
 											className={cn(
@@ -154,14 +219,20 @@ export default function TracksTableToolbar() {
 										role='combobox'
 										className='w-[200px] justify-between'
 									>
-										Genres
+										{selectedGenres.length > 0 ? (
+											<Label className='text-muted-foreground'>
+												{selectedGenres.length} genres selected
+											</Label>
+										) : (
+											'Genres'
+										)}
 										<Icons.chevronUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
 									</Button>
 								</PopoverTrigger>
 								<PopoverContent side='bottom' className='w-[200px] p-0'>
 									<ScrollArea className='h-36 whitespace-nowrap p-2'>
 										{trackMetadataArrays.genres.map((genre) => (
-											<div key={genre} className='flex items-center gap-2 my-2'>
+											<div key={genre} className='flex items-center gap-2'>
 												<Checkbox
 													name='genres'
 													value={genre}
@@ -184,7 +255,13 @@ export default function TracksTableToolbar() {
 										role='combobox'
 										className='w-[200px] justify-between'
 									>
-										Moods
+										{selectedMoods.length > 0 ? (
+											<Label className='text-muted-foreground'>
+												{selectedMoods.length} moods selected
+											</Label>
+										) : (
+											'Moods'
+										)}
 										<Icons.chevronUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
 									</Button>
 								</PopoverTrigger>
@@ -192,7 +269,7 @@ export default function TracksTableToolbar() {
 								<PopoverContent side='bottom' className='w-[200px] p-0'>
 									<ScrollArea className='h-36 whitespace-nowrap p-2'>
 										{trackMetadataArrays.moods.map((mood) => (
-											<div key={mood} className='flex items-center gap-2 my-2'>
+											<div key={mood} className='flex items-center gap-2'>
 												<Checkbox
 													name='moods'
 													value={mood}
@@ -207,14 +284,79 @@ export default function TracksTableToolbar() {
 									</ScrollArea>
 								</PopoverContent>
 							</Popover>
+
+							<Popover modal={true}>
+								<Popover modal={true}>
+									<PopoverTrigger asChild>
+										<Button
+											variant='outline'
+											role='combobox'
+											className='w-[200px] justify-between'
+										>
+											{selectedKeys.length > 0 ? (
+												<Label className='text-muted-foreground'>
+													{selectedKeys.length} keys selected
+												</Label>
+											) : (
+												'Keys'
+											)}
+											<Icons.chevronUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+										</Button>
+									</PopoverTrigger>
+
+									<PopoverContent side='bottom' className='w-[200px] p-0'>
+										<ScrollArea className='h-36 whitespace-nowrap p-2'>
+											{trackMetadataArrays.keys.map((key) => (
+												<div key={key} className='flex items-center gap-2'>
+													<Checkbox
+														name='keys'
+														value={key}
+														defaultChecked={selectedKeys.includes(key)}
+														onCheckedChange={() => handleKeysChange(key)}
+														className='text-muted-foreground border-muted-foreground outline:none focus:outline-none'
+													/>
+													{key}
+												</div>
+											))}
+											<ScrollBar />
+										</ScrollArea>
+									</PopoverContent>
+								</Popover>
+
+								<Popover modal={true}>
+									<PopoverTrigger asChild>
+										<Button
+											variant='outline'
+											role='combobox'
+											className='w-[200px] justify-between'
+										>
+											{selectedType !== '' ? <>{selectedType}</> : 'Track type'}
+											<Icons.chevronUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+										</Button>
+									</PopoverTrigger>
+
+									<PopoverContent side='bottom' className='w-[200px] p-0'>
+										<ScrollArea className='h-36 whitespace-nowrap p-2'>
+											<RadioGroup>
+												{trackMetadataArrays.trackTypes.map((item) => (
+													<div key={item} className='flex items-center gap-2 '>
+														<RadioGroupItem
+															value={item}
+															onClick={() => handleTypeChange(item)}
+															checked={selectedType === item}
+															className='text-muted-foreground border-muted-foreground outline:none focus:outline-none'
+														/>
+														{item}
+													</div>
+												))}
+											</RadioGroup>
+											<ScrollBar />
+										</ScrollArea>
+									</PopoverContent>
+								</Popover>
+							</Popover>
 						</SheetDescription>
 					</SheetHeader>
-					<SheetFooter>
-						<Button className='w-[200px] mt-8' onClick={handleApplyFilters}>
-							<Icons.filter className='w-4 h-4 mr-2' />
-							Apply Filters
-						</Button>
-					</SheetFooter>
 				</SheetContent>
 			</Sheet>
 		</div>

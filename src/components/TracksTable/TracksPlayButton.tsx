@@ -13,7 +13,7 @@ export default function TracksTablePlayButton({
 	index,
 }: TracksTablePlayButtonProps) {
 	return (
-		<div className='relative flex justify-center items-center w-6'>
+		<div className='relative flex justify-center items-center md:w-8'>
 			<div className='text-xs text-muted-foreground group-hover:opacity-0'>
 				{index}
 			</div>

@@ -113,16 +113,19 @@ export const tracksRouter = createTRPCRouter({
 				searchParams: z.object({
 					genres: z.string().or(z.undefined()),
 					moods: z.string().or(z.undefined()),
+					keys: z.string().or(z.undefined()),
+					type: z.string().or(z.undefined()),
 					sort: z.string().or(z.undefined()),
 					amount: z.number().min(1),
 				}),
 			})
 		)
 		.query(async ({ input }) => {
-			const { genres, moods, sort, amount } = input.searchParams
+			const { genres, moods, keys, type, sort, amount } = input.searchParams
 
 			const genreArray = genres ? genres.split(',') : []
 			const moodArray = moods ? moods.split(',') : []
+			const keyArray = keys ? keys.split(',') : []
 			const sortString = sort ? sort : 'desc(tracks.releaseDate)'
 
 			const sortStringToDrizzleSyntax = (sortString: string) => {
@@ -149,6 +152,8 @@ export const tracksRouter = createTRPCRouter({
 			genreArray.length > 0 &&
 				conditions.push(inArray(tracks.genre, genreArray))
 			moodArray.length > 0 && conditions.push(inArray(tracks.mood, moodArray))
+			keyArray.length > 0 && conditions.push(inArray(tracks.key, keyArray))
+			type && conditions.push(eq(tracks.type, type))
 
 			const result = await db
 				.select({
